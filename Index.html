@@ -3,41 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ข่าวการจราจรกรุงเทพ</title>
+    <title>อัปเดตการจราจร</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1 id="title"></h1>
-        <div>
-            <button onclick="setLanguage('en')">English</button>
-            <button onclick="setLanguage('th')">ไทย</button>
-        </div>
+        <h1>อัปเดตการจราจร</h1>
+        <nav>
+            <a href="#">บุ๊กมาร์ก</a> | <a href="#">ช่วยเหลือ</a>
+        </nav>
     </header>
-
     <main>
-        <div class="area-card" data-area="business" role="button" tabindex="0">
-            <img src="icons/city.png" alt="City Icon">
-            <p id="area-business"></p>
+        <div class="area-card" data-area="city">
+            <img src="icon-city.png" alt="เขตเมือง">
+            <h3>เขตเมือง</h3>
         </div>
-        <div class="area-card" data-area="northern" role="button" tabindex="0">
-            <img src="icons/park.png" alt="Park Icon">
-            <p id="area-northern"></p>
+        <div class="area-card" data-area="park">
+            <img src="icon-park.png" alt="เขตสวนสาธารณะ">
+            <h3>เขตสวนสาธารณะ</h3>
         </div>
-        <div class="area-card" data-area="southeastern" role="button" tabindex="0">
-            <img src="icons/highway.png" alt="Highway Icon">
-            <p id="area-southeastern"></p>
+        <div class="area-card" data-area="highway">
+            <img src="icon-highway.png" alt="เขตทางหลวง">
+            <h3>เขตทางหลวง</h3>
         </div>
-        <div class="area-card" data-area="western" role="button" tabindex="0">
-            <img src="icons/river.png" alt="River Icon">
-            <p id="area-western"></p>
+        <div class="area-card" data-area="river">
+            <img src="icon-river.png" alt="เขตริมแม่น้ำ">
+            <h3>เขตริมแม่น้ำ</h3>
         </div>
     </main>
-
     <footer>
-        <p>Bookmarks | Help</p>
+        <p>อัปเดตล่าสุด: <span id="last-updated"></span></p>
     </footer>
-
+    <div id="notification-banner"></div>
     <script src="script.js"></script>
 </body>
 </html>
