@@ -67,3 +67,9 @@ footer {
 .green { background-color: green; }
 .yellow { background-color: yellow; }
 .red { background-color: red; }
+
+#language-switcher button.active {
+    font-weight: bold;
+    background-color: #0056b3;
+    color: white;
+}
