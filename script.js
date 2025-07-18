@@ -1,90 +1,84 @@
-// Mock data with translations
+// Mock data with translations for both Thai and English
 const mockData = {
     business: {
-        area: {
-            th: "เขตธุรกิจกลางและวัฒนธรรม",
-            en: "Central Business and Cultural District"
-        },
+        area: { en: "Central Business and Cultural District", th: "เขตธุรกิจกลางและวัฒนธรรม" },
         locations: [
             {
-                name: { th: "ถนนพระรามที่ 1", en: "Rama I Road" },
-                status: { th: "ล่าช้าอย่างหนักใกล้สยามสแควร์", en: "Heavy delay near Siam Square" },
+                name: { en: "Rama I Road", th: "ถนนพระรามที่ 1" },
+                status: { en: "Heavy delay near Siam Square", th: "ล่าช้าอย่างหนักใกล้สยามสแควร์" },
                 color: "red"
             },
             {
-                name: { th: "ถนนสาทร", en: "Sath-": "Sathorn Road" },
-                status: { th: "ล่าช้าอย่างหนักใกล้สะพานตากสิน", en: "Heavy delay near Taksin Bridge" },
+                name: { en: "Sathon Road", th: "ถนนสาทร" },
+                status: { en: "Heavy delay near Taksin Bridge", th: "ล่าช้าอย่างหนักใกล้สะพานตากสิน" },
                 color: "red"
             }
         ]
     },
     northern: {
-        area: {
-            th: "เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ",
-            en: "Northern Residential and Park Area"
-        },
+        area: { en: "Northern Residential and Park Area", th: "เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ" },
         locations: [
             {
-                name: { th: "ถนนพหลโยธิน", en: "Phahonyothin Road" },
-                status: { th: "การจราจรคล่องตัว", en: "Smooth traffic" },
+                name: { en: "Phahonyothin Road", th: "ถนนพหลโยธิน" },
+                status: { en: "Smooth traffic", th: "การจราจรคล่องตัว" },
                 color: "green"
             }
         ]
     },
     southeastern: {
-        area: {
-            th: "เขตทางหลวงตะวันออกเฉียงใต้",
-            en: "Southeastern Highway Area"
-        },
+        area: { en: "Southeastern Highway Area", th: "เขตทางหลวงตะวันออกเฉียงใต้" },
         locations: [
             {
-                name: { th: "ถนนสุขุมวิท", en: "Sukhumvit Road" },
-                status: { th: "ล่าช้าปานกลาง", en: "Moderate delay" },
+                name: { en: "Sukhumvit Road", th: "ถนนสุขุมวิท" },
+                status: { en: "Moderate delay", th: "ล่าช้าปานกลาง" },
                 color: "yellow"
             }
         ]
     },
     western: {
-        area: {
-            th: "เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก",
-            en: "Western Riverside and Historical District"
-        },
+        area: { en: "Western Riverside and Historical District", th: "เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก" },
         locations: [
             {
-                name: { th: "ถนนจักรเพชร", en: "Chak Phet Road" },
-                status: { th: "การจราจรคล่องตัว", en: "Smooth traffic" },
+                name: { en: "Chak Phet Road", th: "ถนนจักรเพชร" },
+                status: { en: "Smooth traffic", th: "การจราจรคล่องตัว" },
                 color: "green"
             }
         ]
     }
 };
 
-let currentLang = 'th'; // Default language
-let currentArea = null;
-
-// Function to set language and update UI
-function setLanguage(lang) {
-    currentLang = lang;
-    document.getElementById('lang-th').classList.toggle('active', lang === 'th');
-    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-    document.querySelectorAll('.lang-th').forEach(el => el.style.display = lang === 'th' ? 'block' : 'none');
-    document.querySelectorAll('.lang-en').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-    if (currentArea) {
-        showArea(currentArea);
+// Translations for static UI elements
+const translations = {
+    en: {
+        title: "Traffic News Bangkok",
+        lastUpdated: "Last Updated:",
+        back: "Back"
+    },
+    th: {
+        title: "ข่าวการจราจรกรุงเทพ",
+        lastUpdated: "อัปเดตล่าสุด:",
+        back: "กลับ"
     }
+};
+
+let currentLang = 'en'; // Default language is English
+
+// Function to update main page text based on current language
+function updateMainPage() {
+    document.getElementById('title').textContent = translations[currentLang].title;
+    document.getElementById('area-business').textContent = mockData.business.area[currentLang];
+    document.getElementById('area-northern').textContent = mockData.northern.area[currentLang];
+    document.getElementById('area-southeastern').textContent = mockData.southeastern.area[currentLang];
+    document.getElementById('area-western').textContent = mockData.western.area[currentLang];
 }
 
-// Function to display area-specific page
+// Function to display area-specific page with translated content
 function showArea(area) {
-    currentArea = area;
     const areaData = mockData[area];
-    const lastUpdatedText = currentLang === 'th' ? 'อัปเดตล่าสุด' : 'Last Updated';
-    const backText = currentLang === 'th' ? 'กลับ' : 'Back';
-    const timeString = new Date().toLocaleTimeString(currentLang === 'th' ? 'th-TH' : 'en-US');
     const main = document.querySelector('main');
     main.innerHTML = `
         <h2>${areaData.area[currentLang]}</h2>
-        <p id="last-updated">${lastUpdatedText}: ${timeString}</p>
+        <p id="last-updated">${translations[currentLang].lastUpdated} ${new Date().toLocaleTimeString()}</p>
         <ul>
             ${areaData.locations.map(loc => `
                 <li>
@@ -93,25 +87,51 @@ function showArea(area) {
                 </li>
             `).join('')}
         </ul>
-        <button onclick="backToMain()">${backText}</button>
+        <button onclick="backToMain()">${translations[currentLang].back}</button>
     `;
 }
 
-// Function to return to main page
+// Function to return to main page and regenerate content
 function backToMain() {
-    currentArea = null;
-    location.reload(); // Simple reload for now
+    const main = document.querySelector('main');
+    main.innerHTML = `
+        <div class="area-card" data-area="business">
+            <img src="icons/city.png" alt="City Icon">
+            <p id="area-business"></p>
+        </div>
+        <div class="area-card" data-area="northern">
+            <img src="icons/park.png" alt="Park Icon">
+            <p id="area-northern"></p>
+        </div>
+        <div class="area-card" data-area="southeastern">
+            <img src="icons/highway.png" alt="Highway Icon">
+            <p id="area-southeastern"></p>
+        </div>
+        <div class="area-card" data-area="western">
+            <img src="icons/river.png" alt="River Icon">
+            <p id="area-western"></p>
+        </div>
+    `;
+    updateMainPage();
+    document.querySelectorAll('.area-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const area = card.getAttribute('data-area');
+            showArea(area);
+        });
+    });
 }
 
-// Add click events to area cards
+// Function to set language and refresh UI
+function setLanguage(lang) {
+    currentLang = lang;
+    backToMain();
+}
+
+// Initial setup
+updateMainPage();
 document.querySelectorAll('.area-card').forEach(card => {
-    card.addEventListener('click', () => {
+    card  card.addEventListener('click', () => {
         const area = card.getAttribute('data-area');
         showArea(area);
     });
-});
-
-// Set initial language
-window.addEventListener('load', () => {
-    setLanguage(currentLang);
 });
