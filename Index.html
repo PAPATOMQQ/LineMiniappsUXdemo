@@ -1,41 +1,46 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic News Bangkok</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="notification-banner"></div>
     <header>
-        <h1>Traffic News Bangkok</h1>
+        <h1 class="lang-en">Traffic News Bangkok</h1>
+        <h1 class="lang-th" style="display: none;">ข่าวการจราจรกรุงเทพฯ</h1>
+        <div id="language-switcher">
+            <button id="lang-th" onclick="setLanguage('th')">ไทย</button>
+            <button id="lang-en" onclick="setLanguage('en')">English</button>
+        </div>
     </header>
     <main>
         <div class="area-card" data-area="business">
-            <img src="https://via.placeholder.com/50" alt="Skyscraper">
-            <h2>เขตธุรกิจกลางและวัฒนธรรม</h2>
-            <p>Central Business and Cultural District</p>
+            <img src="icons/business.png" alt="Business District Icon">
+            <h2 class="lang-th">เขตธุรกิจกลางและวัฒนธรรม</h2>
+            <h2 class="lang-en" style="display: none;">Central Business and Cultural District</h2>
         </div>
         <div class="area-card" data-area="northern">
-            <img src="https://via.placeholder.com/50" alt="Park">
-            <h2>เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ</h2>
-            <p>Northern Residential and Park Area</p>
+            <img src="icons/northern.png" alt="Northern Area Icon">
+            <h2 class="lang-th">เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ</h2>
+            <h2 class="lang-en" style="display: none;">Northern Residential and Park Area</h2>
         </div>
         <div class="area-card" data-area="southeastern">
-            <img src="https://via.placeholder.com/50" alt="Highway">
-            <h2>เขตทางหลวงตะวันออกเฉียงใต้</h2>
-            <p>Southeastern Highway Area</p>
+            <img src="icons/southeastern.png" alt="Southeastern Area Icon">
+            <h2 class="lang-th">เขตทางหลวงตะวันออกเฉียงใต้</h2>
+            <h2 class="lang-en" style="display: none;">Southeastern Highway Area</h2>
         </div>
         <div class="area-card" data-area="western">
-            <img src="https://via.placeholder.com/50" alt="Temple">
-            <h2>เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก</h2>
-            <p>Western Riverside and Historical District</p>
+            <img src="icons/western.png" alt="Western Area Icon">
+            <h2 class="lang-th">เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก</h2>
+            <h2 class="lang-en" style="display: none;">Western Riverside and Historical District</h2>
         </div>
     </main>
     <footer>
-        <a href="#bookmarks">Bookmarks</a> | <a href="#help">Help</a>
+        <span class="lang-en">Bookmarks | Help</span>
+        <span class="lang-th" style="display: none;">บุ๊คมาร์ค | ช่วยเหลือ</span>
     </footer>
+    <div id="notification-banner"></div>
     <script src="script.js"></script>
 </body>
 </html>
