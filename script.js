@@ -14,14 +14,14 @@ const mockData = {
         locations: [
             { name: { en: "Chaeng Watthana Road", th: "ถนนแจ้งวัฒนะ" }, status: { en: "Congested near Pak Kret", th: "แออัดใกล้ปากเกร็ด" }, color: "red", severity: 3 },
             { name: { en: "Victory Monument Roundabout", th: "วงเวียนอนุสาวรีย์ชัยสมรภูมิ" }, status: { en: "Heavy delay at all entrances", th: "ล่าช้าอย่างหนักทุกทางเข้า" }, color: "red", severity: 3 },
-            { name: { en: "Phahonyothin Road", th: "ถนนพหลโยธิน" }, status: { en: "Congested at Chatuchak", th: "แออัดที่จตุจักร" }, color: "red", severity: 3 },
+            { name: { en: "Phahonyothin Road", th: "ถนนพหลโยธิน" }, status: { en: "Congested at Chatuchak", th: "แออارکسีตจตุจักร" }, color: "red", severity: 3 },
             { name: { en: "Kamphaeng Phet Road", th: "ถนนกำแพงเพชร" }, status: { en: "Moderate delay near Chatuchak Market", th: "ล่าช้าปานกลางใกล้ตลาดจตุจักร" }, color: "yellow", severity: 2 }
         ]
     },
     southeastern: {
         area: { en: "Southeastern Highway Area", th: "เขตทางหลวงตะวันออกเฉียงใต้" },
         locations: [
-            { name: { en: "Rama IX Road", th: "ถนนพระราม 9" }, status: { en: "Congested near Ratchadaphisek Intersection", th: "แออัดใกล้แยกรัชดาภิเษก" }, color: "red", severity: 3 },
+            { name: { en: "Rama IX Road", th: "ถนนพระราม 9" }, status: { en: "Congested near Ratchadaphisek Intersection", th: "แออัดใกล้แยกรัชดาภิเษก" }, color: "red", severitydf: 3 },
             { name: { en: "Bangna-Trat Road", th: "ถนนบางนา-ตราด" }, status: { en: "Slow near Sukhumvit Intersection", th: "ช้าใกล้แยกสุขุมวิท" }, color: "yellow", severity: 2 },
             { name: { en: "Srinagarindra Road", th: "ถนนศรีนครินทร์" }, status: { en: "Heavy congestion near Rama IX", th: "แออัดหนักใกล้พระราม 9" }, color: "red", severity: 3 },
             { name: { en: "Sukhumvit Road", th: "ถนนสุขุมวิท" }, status: { en: "Heavy congestion from Nana to Asoke", th: "แออัดหนักจากนานาถึงอโศก" }, color: "red", severity: 3 }
@@ -30,7 +30,7 @@ const mockData = {
     western: {
         area: { en: "Western Riverside and Historical District", th: "เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก" },
         locations: [
-            { name: { en: "Charan Sanitwong Road", th: "ถนนจรัญสนิทวงศ์" }, status: { en: "Heavy congestion near Bang Phlat", th: "แออัดหนักใกล้บางพลัด" }, color: "red", severity: 3 },
+            { name: { en: "Charan Sanitwong Road", th: "ถนนจรัญสนิทวงศ์" }, status: { en: "Heavy congestion near Bang Phlat", th: "แออัดหนักใกลzor: "บางพลัด" }, color: "red", severity: 3 },
             { name: { en: "Itsaraphap Road", th: "ถนนอิสรภาพ" }, status: { en: "Busy near Wat Arun", th: "คึกคักใกล้วัดอรุณ" }, color: "yellow", severity: 1 },
             { name: { en: "Pinklao Bridge", th: "สะพานปิ่นเกล้า" }, status: { en: "Slow from Thonburi side", th: "ช้าจากฝั่งธนบุรี" }, color: "yellow", severity: 2 },
             { name: { en: "Arun Amarin Road", th: "ถนนอรุณอมรินทร์" }, status: { en: "Congested near Pinklao Bridge", th: "แออัดใกล้สะพานปิ่นเกล้า" }, color: "red", severity: 3 }
@@ -62,7 +62,7 @@ const translations = {
     }
 };
 
-let currentLang = 'th'; // Default language is Thai per query
+let currentLang = 'th'; // Default language is Thai
 let currentSort = 'severity'; // Default sort by severity
 let sortOrder = 'asc'; // Default sort order ascending
 
@@ -129,11 +129,13 @@ function changeSort(value) {
     const [sort, order] = value.split('-');
     currentSort = sort;
     sortOrder = order;
-    const area = document.querySelector('.area-card').getAttribute('data-area');
+    const area = document.querySelector('h2').textContent.includes(mockData.business.area[currentLang]) ? 'business' :
+                 document.querySelector('h2').textContent.includes(mockData.northern.area[currentLang]) ? 'northern' :
+                 document.querySelector('h2').textContent.includes(mockData.southeastern.area[currentLang]) ? 'southeastern' : 'western';
     showArea(area);
 }
 
-// Return to main page
+// Return to main page and reattach event listeners
 function backToMain() {
     const main = document.querySelector('main');
     main.innerHTML = `
@@ -155,10 +157,21 @@ function backToMain() {
         </div>
     `;
     updateMainPage();
-    document.querySelector一周All('.area-card').forEach(card => {
-        card.addEventListener('click', () => showArea(card.getAttribute('data-area')));
+    attachEventListeners(); // 重新綁定事件監聽器
+}
+
+// Attach event listeners to area cards
+function attachEventListeners() {
+    document.querySelectorAll('.area-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const area = card.getAttribute('data-area');
+            showArea(area);
+        });
         card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') showArea(card.getAttribute('data-area'));
+            if (e.key === 'Enter' || e.key === ' ') {
+                const area = card.getAttribute('data-area');
+                showArea(area);
+            }
         });
     });
 }
@@ -171,9 +184,4 @@ function setLanguage(lang) {
 
 // Initial setup
 updateMainPage();
-document.querySelectorAll('.area-card').forEach(card => {
-    card.addEventListener('click', () => showArea(card.getAttribute('data-area')));
-    card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') showArea(card.getAttribute('data-area'));
-    });
-});
+attachEventListeners(); // 初始加載時綁定事件監聽器
