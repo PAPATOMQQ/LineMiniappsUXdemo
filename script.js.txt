@@ -1,0 +1,60 @@
+﻿// Mock data for demonstration
+const mockData = {
+    business: {
+        area: "เขตธุรกิจกลางและวัฒนธรรม",
+        locations: [
+            { name: "ถนนพระรามที่ 1", status: "ล่าช้าอย่างหนักใกล้สยามสแควร์", color: "red" },
+            { name: "ถนนสาทร", status: "ล่าช้าอย่างหนักใกล้สะพานตากสิน", color: "red" }
+        ]
+    },
+    northern: {
+        area: "เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ",
+        locations: [
+            { name: "ถนนพหลโยธิน", status: "การจราจรคล่องตัว", color: "green" }
+        ]
+    },
+    southeastern: {
+        area: "เขตทางหลวงตะวันออกเฉียงใต้",
+        locations: [
+            { name: "ถนนสุขุมวิท", status: "ล่าช้าปานกลาง", color: "yellow" }
+        ]
+    },
+    western: {
+        area: "เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก",
+        locations: [
+            { name: "ถนนจักรเพชร", status: "การจราจรคล่องตัว", color: "green" }
+        ]
+    }
+};
+
+// Function to display area-specific page
+function showArea(area) {
+    const areaData = mockData[area];
+    const main = document.querySelector('main');
+    main.innerHTML = `
+        <h2>${areaData.area}</h2>
+        <p id="last-updated">Last Updated: ${new Date().toLocaleTimeString()}</p>
+        <ul>
+            ${areaData.locations.map(loc => `
+                <li>
+                    <span class="dot ${loc.color}"></span>
+                    ${loc.name}: ${loc.status}
+                </li>
+            `).join('')}
+        </ul>
+        <button onclick="backToMain()">Back</button>
+    `;
+}
+
+// Function to return to main page
+function backToMain() {
+    location.reload(); // Simple reload for now; can be improved later
+}
+
+// Add click events to area cards
+document.querySelectorAll('.area-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const area = card.getAttribute('data-area');
+        showArea(area);
+    });
+});

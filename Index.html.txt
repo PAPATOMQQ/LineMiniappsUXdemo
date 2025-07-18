@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic News Bangkok</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="notification-banner"></div>
+    <header>
+        <h1>Traffic News Bangkok</h1>
+    </header>
+    <main>
+        <div class="area-card" data-area="business">
+            <img src="https://via.placeholder.com/50" alt="Skyscraper">
+            <h2>เขตธุรกิจกลางและวัฒนธรรม</h2>
+            <p>Central Business and Cultural District</p>
+        </div>
+        <div class="area-card" data-area="northern">
+            <img src="https://via.placeholder.com/50" alt="Park">
+            <h2>เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ</h2>
+            <p>Northern Residential and Park Area</p>
+        </div>
+        <div class="area-card" data-area="southeastern">
+            <img src="https://via.placeholder.com/50" alt="Highway">
+            <h2>เขตทางหลวงตะวันออกเฉียงใต้</h2>
+            <p>Southeastern Highway Area</p>
+        </div>
+        <div class="area-card" data-area="western">
+            <img src="https://via.placeholder.com/50" alt="Temple">
+            <h2>เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก</h2>
+            <p>Western Riverside and Historical District</p>
+        </div>
+    </main>
+    <footer>
+        <a href="#bookmarks">Bookmarks</a> | <a href="#help">Help</a>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
