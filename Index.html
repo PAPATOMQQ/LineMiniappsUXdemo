@@ -10,25 +10,25 @@
     <header>
         <h1 id="title"></h1>
         <div>
-            <button onclick="setLanguage('en')">English</button>
-            <button onclick="setLanguage('th')">ไทย</button>
+            <button onclick="setLanguage('en')" aria-label="Switch to English">English</button>
+            <button onclick="setLanguage('th')" aria-label="Switch to Thai">ไทย</button>
         </div>
     </header>
 
     <main>
-        <div class="area-card" data-area="business">
+        <div class="area-card" data-area="business" role="button" tabindex="0">
             <img src="icons/city.png" alt="City Icon">
             <p id="area-business"></p>
         </div>
-        <div class="area-card" data-area="northern">
+        <div class="area-card" data-area="northern" role="button" tabindex="0">
             <img src="icons/park.png" alt="Park Icon">
             <p id="area-northern"></p>
         </div>
-        <div class="area-card" data-area="southeastern">
+        <div class="area-card" data-area="southeastern" role="button" tabindex="0">
             <img src="icons/highway.png" alt="Highway Icon">
             <p id="area-southeastern"></p>
         </div>
-        <div class="area-card" data-area="western">
+        <div class="area-card" data-area="western" role="button" tabindex="0">
             <img src="icons/river.png" alt="River Icon">
             <p id="area-western"></p>
         </div>
