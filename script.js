@@ -1,26 +1,26 @@
 // Mock data for demonstration
 const mockData = {
-    business: {
-        area: "เขตธุรกิจกลางและวัฒนธรรม",
+    city: {
+        area: "เขตเมือง",
         locations: [
             { name: "ถนนพระรามที่ 1", status: "ล่าช้าอย่างหนักใกล้สยามสแควร์", color: "red" },
             { name: "ถนนสาทร", status: "ล่าช้าอย่างหนักใกล้สะพานตากสิน", color: "red" }
         ]
     },
-    northern: {
-        area: "เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ",
+    park: {
+        area: "เขตสวนสาธารณะ",
         locations: [
             { name: "ถนนพหลโยธิน", status: "การจราจรคล่องตัว", color: "green" }
         ]
     },
-    southeastern: {
-        area: "เขตทางหลวงตะวันออกเฉียงใต้",
+    highway: {
+        area: "เขตทางหลวง",
         locations: [
             { name: "ถนนสุขุมวิท", status: "ล่าช้าปานกลาง", color: "yellow" }
         ]
     },
-    western: {
-        area: "เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก",
+    river: {
+        area: "เขตริมแม่น้ำ",
         locations: [
             { name: "ถนนจักรเพชร", status: "การจราจรคล่องตัว", color: "green" }
         ]
