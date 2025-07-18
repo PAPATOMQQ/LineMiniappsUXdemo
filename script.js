@@ -1,52 +1,116 @@
-// 定義全局變量來存儲當前區域
-let currentArea = null;
+// Mock data for demonstration
+const mockData = {
+    business: {
+        area: "เขตธุรกิจกลางและวัฒนธรรม",
+        locations: [
+            { name: "ถนนพระรามที่ 1", status: "ล่าช้าอย่างหนักใกล้สยามสแควร์", color: "red" },
+            { name: "ถนนสาทร", status: "ล่าช้าอย่างหนักใกล้สะพานตากสิน", color: "red" }
+        ]
+    },
+    northern: {
+        area: "เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ",
+        locations: [
+            { name: "ถนนพหลโยธิน", status: "การจราจรคล่องตัว", color: "green" }
+        ]
+    },
+    southeastern: {
+        area: "เขตทางหลวงตะวันออกเฉียงใต้",
+        locations: [
+            { name: "ถนนสุขุมวิท", status: "ล่าช้าปานกลาง", color: "yellow" }
+        ]
+    },
+    western: {
+        area: "เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก",
+        locations: [
+            { name: "ถนนจักรเพชร", status: "การจราจรคล่องตัว", color: "green" }
+        ]
+    }
+};
 
-// 顯示區域頁面的函數
+// Cache the main element
+const main = document.querySelector('main');
+let mainContentBackup = null; // To store the main page content
+
+// Function to display area-specific page
 function showArea(area) {
-    currentArea = area; // 更新當前區域
-    const main = document.querySelector('main');
-    main.classList.add('loading');
+    const areaData = mockData[area];
+    if (!areaData) return; // Prevent errors if area is not found
 
+    // Backup the main content if not already done
+    if (!mainContentBackup) {
+        mainContentBackup = main.cloneNode(true);
+    }
+
+    // Clear the main content with fade-out
+    main.style.opacity = '0';
     setTimeout(() => {
-        if (!mockData[area]) {
-            main.innerHTML = `<p>錯誤：無此區域資料</p>`;
-            main.classList.remove('loading');
-            return;
-        }
+        main.innerHTML = '';
 
-        const areaData = mockData[area];
-        const sortedLocations = sortLocations([...areaData.locations]);
+        // Create and append the area title
+        const title = document.createElement('h2');
+        title.textContent = areaData.area;
+        main.appendChild(title);
 
-        main.innerHTML = `
-            <h2>${areaData.area[currentLang]}</h2>
-            <p id="last-updated">最後更新：${new Date().toLocaleTimeString()}</p>
-            <div>
-                <label for="sort-select">排序方式：</label>
-                <select id="sort-select" onchange="changeSort(this.value)">
-                    <option value="severity-asc">嚴重程度（升序）</option>
-                    <option value="severity-desc">嚴重程度（降序）</option>
-                </select>
-            </div>
-            <ul>
-                ${sortedLocations.map(loc => `
-                    <li>
-                        <span class="dot ${loc.color}"></span>
-                        ${loc.name[currentLang]}: ${loc.status[currentLang]}
-                    </li>
-                `).join('')}
-            </ul>
-            <button onclick="backToMain()">返回</button>
-        `;
-        main.classList.remove('loading');
-    }, 500);
+        // Create and append the last updated time
+        const lastUpdated = document.createElement('p');
+        lastUpdated.id = 'last-updated';
+        lastUpdated.textContent = `อัปเดตล่าสุด: ${new Date().toLocaleTimeString('th-TH')}`;
+        main.appendChild(lastUpdated);
+
+        // Create and append the list of locations
+        const list = document.createElement('ul');
+        areaData.locations.forEach(loc => {
+            const listItem = document.createElement('li');
+            const dot = document.createElement('span');
+            dot.className = `dot ${loc.color}`;
+            listItem.appendChild(dot);
+            listItem.appendChild(document.createTextNode(`${loc.name}: ${loc.status}`));
+            list.appendChild(listItem);
+        });
+        main.appendChild(list);
+
+        // Create and append the back button
+        const backButton = document.createElement('button');
+        backButton.textContent = 'กลับ';
+        backButton.addEventListener('click', backToMain);
+        main.appendChild(backButton);
+
+        // Fade-in effect
+        main.style.opacity = '1';
+    }, 300); // Match CSS transition duration
 }
 
-// 處理排序選擇的函數
-function changeSort(value) {
-    const [sort, order] = value.split('-'); // 解析排序條件，例如 "severity-asc"
-    currentSort = sort;  // 更新排序依據
-    sortOrder = order;   // 更新排序順序
-    if (currentArea) {
-        showArea(currentArea); // 使用當前區域重新渲染頁面
+// Function to return to main page
+function backToMain() {
+    if (mainContentBackup) {
+        main.style.opacity = '0';
+        setTimeout(() => {
+            main.innerHTML = '';
+            main.appendChild(mainContentBackup.cloneNode(true));
+            main.style.opacity = '1';
+            // Re-attach event listeners to the area cards
+            attachAreaCardEvents();
+        }, 300);
     }
 }
+
+// Function to attach event listeners to area cards
+function attachAreaCardEvents() {
+    document.querySelectorAll('.area-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const area = card.getAttribute('data-area');
+            showArea(area);
+        });
+    });
+}
+
+// Initial attachment of event listeners
+attachAreaCardEvents();
+
+// Simulate real-time updates (optional)
+setInterval(() => {
+    const lastUpdated = document.getElementById('last-updated');
+    if (lastUpdated) {
+        lastUpdated.textContent = `อัปเดตล่าสุด: ${new Date().toLocaleTimeString('th-TH')}`;
+    }
+}, 60000); // Update every minute
