@@ -5,7 +5,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    line-height: 1.6; /* Improved readability */
+    line-height: 1.6;
 }
 
 /* Header styling */
@@ -15,7 +15,7 @@ header {
     text-align: center;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky; /* Sticky header for better navigation */
+    position: sticky;
     top: 0;
     z-index: 10;
 }
@@ -26,8 +26,9 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
     padding: 1.5rem;
-    max-width: 1200px; /* Constrain width for better readability on large screens */
-    margin: 0 auto; /* Center the content */
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Area card styling */
@@ -39,18 +40,17 @@ main {
     text-align: center;
     padding: 1.5rem;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s; /* Added shadow transition */
-    position: relative; /* For potential overlays */
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
 .area-card:hover {
     transform: scale(1.05);
     background-color: #f0f8ff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .area-card:focus {
-    outline: 2px solid #007bff; /* Accessibility: focus indicator */
+    outline: 2px solid #007bff;
     outline-offset: 2px;
 }
 
@@ -59,11 +59,11 @@ main {
     width: 60px;
     height: 60px;
     margin-bottom: 0.5rem;
-    transition: transform 0.2s; /* Smooth icon animation */
+    transition: transform 0.2s;
 }
 
 .area-card:hover img {
-    transform: scale(1.1); /* Slight icon enlargement on hover */
+    transform: scale(1.1);
 }
 
 /* Footer styling */
@@ -72,32 +72,7 @@ footer {
     padding: 1rem;
     background-color: #f4f4f4;
     color: #666;
-    border-top: 1px solid #ddd; /* Subtle separation */
-}
-
-/* Notification banner styling */
-#notification-banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ffcc00;
-    color: black;
-    text-align: center;
-    padding: 1rem;
-    display: none;
-    transition: transform 0.3s ease-in-out, opacity 0.3s; /* Added opacity transition */
-    transform: translateY(-100%);
-    z-index: 20; /* Ensure it stays above other elements */
-}
-
-#notification-banner.show {
-    transform: translateY(0);
-    opacity: 1; /* Fade in effect */
-}
-
-#notification-banner.hide {
-    opacity: 0; /* Fade out effect */
+    border-top: 1px solid #ddd;
 }
 
 /* Traffic status dots */
@@ -107,14 +82,14 @@ footer {
     border-radius: 50%;
     display: inline-block;
     margin-right: 8px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Subtle depth */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .green { background-color: #28a745; }
 .yellow { background-color: #ffc107; }
 .red { background-color: #dc3545; }
 
-/* Button styling (if applicable) */
+/* Button styling */
 button {
     background-color: #007bff;
     color: white;
@@ -126,11 +101,11 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
 }
 
 button:focus {
-    outline: 2px solid #0056b3; /* Accessibility: focus indicator */
+    outline: 2px solid #0056b3;
     outline-offset: 2px;
 }
 
@@ -151,12 +126,8 @@ button:focus {
 
 @media (max-width: 480px) {
     .area-card img {
-        width: 50px; /* Smaller icons on very small screens */
+        width: 50px;
         height: 50px;
-    }
-
-    #notification-banner {
-        font-size: 0.9rem; /* Slightly smaller text */
     }
 }
 
