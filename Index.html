@@ -1,46 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traffic News Bangkok</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1 class="lang-en">Traffic News Bangkok</h1>
-        <h1 class="lang-th" style="display: none;">ข่าวการจราจรกรุงเทพฯ</h1>
-        <div id="language-switcher">
-            <button id="lang-th" onclick="setLanguage('th')">ไทย</button>
-            <button id="lang-en" onclick="setLanguage('en')">English</button>
+        <h1 id="title"></h1>
+        <div>
+            <button onclick="setLanguage('en')">English</button>
+            <button onclick="setLanguage('th')">ไทย</button>
         </div>
     </header>
+
     <main>
         <div class="area-card" data-area="business">
-            <img src="icons/business.png" alt="Business District Icon">
-            <h2 class="lang-th">เขตธุรกิจกลางและวัฒนธรรม</h2>
-            <h2 class="lang-en" style="display: none;">Central Business and Cultural District</h2>
+            <img src="icons/city.png" alt="City Icon">
+            <p id="area-business"></p>
         </div>
         <div class="area-card" data-area="northern">
-            <img src="icons/northern.png" alt="Northern Area Icon">
-            <h2 class="lang-th">เขตที่อยู่อาศัยและสวนสาธารณะทางเหนือ</h2>
-            <h2 class="lang-en" style="display: none;">Northern Residential and Park Area</h2>
+            <img src="icons/park.png" alt="Park Icon">
+            <p id="area-northern"></p>
         </div>
         <div class="area-card" data-area="southeastern">
-            <img src="icons/southeastern.png" alt="Southeastern Area Icon">
-            <h2 class="lang-th">เขตทางหลวงตะวันออกเฉียงใต้</h2>
-            <h2 class="lang-en" style="display: none;">Southeastern Highway Area</h2>
+            <img src="icons/highway.png" alt="Highway Icon">
+            <p id="area-southeastern"></p>
         </div>
         <div class="area-card" data-area="western">
-            <img src="icons/western.png" alt="Western Area Icon">
-            <h2 class="lang-th">เขตริมแม่น้ำและประวัติศาสตร์ทางตะวันตก</h2>
-            <h2 class="lang-en" style="display: none;">Western Riverside and Historical District</h2>
+            <img src="icons/river.png" alt="River Icon">
+            <p id="area-western"></p>
         </div>
     </main>
+
     <footer>
-        <span class="lang-en">Bookmarks | Help</span>
-        <span class="lang-th" style="display: none;">บุ๊คมาร์ค | ช่วยเหลือ</span>
+        <p>Bookmarks | Help</p>
     </footer>
-    <div id="notification-banner"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
